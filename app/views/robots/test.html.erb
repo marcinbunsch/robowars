@@ -1,0 +1,44 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/third-party/raphael-1.4.3.min.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/third-party/underscore-1.0.4.min.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/third-party/base.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/jsrobowar.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/gui.js"></script>
+
+<div id="container">
+
+  <section id="play">
+
+    <div id="game">
+      <div id="arena"></div>
+      <div>
+        <div id="scoreboard"></div>
+        <div id="controls">
+          <button id="start">Battle</button>
+          <button id="stop">Halt</button>
+          <br/>
+          <input type="checkbox" id="sound" autocomplete="off"/>
+          <label for="sound">Enable sound</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <section id="editor">
+      <hr/>
+      <h2>Robot X</h2>
+      <div id="errors"></div>
+      <div id="editors"></div>
+    </section>
+
+    <fieldset id="choices">
+      <legend>Load a robot to test against:</legend>
+      <ol></ol>
+    </fieldset>
+
+  </section>
+
+</div>
+
+<textarea id="tested_robot" alt="<%= @robot.name %>" style="display:none"><%= @robot.code %></textarea>

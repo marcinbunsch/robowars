@@ -1,5 +1,11 @@
 Hackstrap::Application.routes.draw do
 
+  resources :robots do
+    member do
+      get :test
+    end
+  end
+
   get "/oauth/github" => 'oauth/github#new'
   get "/oauth/github/callback" => 'oauth/github#create'
 

@@ -1,0 +1,46 @@
+// Place all the styles related to the Robots controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#arena {
+  float: left
+}
+#scoreboard { 
+  float: left
+}
+
+.robots a.create {
+  float: right;
+}
+
+.robots table {
+  margin-top: 10px;
+
+  .actions {
+    width: 150px;
+  }
+
+  td.name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+
+form.robot {
+  .controls {
+    input, textarea {
+      width: 500px;
+    }
+  }
+
+  .CodeMirror {
+    width: 508px;
+    height: 600px;
+    background-color: #fff;
+    border: 1px solid #EEE;
+  }
+  .CodeMirror-scroll {
+    height: auto; 
+    overflow: visible;
+  }
+}

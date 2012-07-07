@@ -1,0 +1,42 @@
+<script src="/codemirror/codemirror.js"></script>
+<link rel="stylesheet" href="/codemirror/codemirror.css">
+
+<%= form_for(@robot, :html =>{ :class => 'robot form-horizontal'}) do |f| %>
+  <% if @robot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@robot.errors.count, "error") %> prohibited this robot from being saved:</h2>
+
+      <ul>
+      <% @robot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :code, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :code %>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-actions">
+    <div class="btn-group">
+      <%= f.submit "Save", :class => 'btn btn-primary' %>
+      <%= link_to 'Back', robots_path, :class => 'btn' %>
+    </div>
+  </div>
+<% end %>
+<script type="text/javascript">
+  var myTextArea = document.getElementById('robot_code');
+  var myCodeMirror = CodeMirror.fromTextArea(myTextArea, {
+    lineNumbers: true   
+  });
+</script>

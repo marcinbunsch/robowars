@@ -24,3 +24,4 @@ config/database.yml
 coverage
 
 config/settings.local.yml
+.sass-cache
