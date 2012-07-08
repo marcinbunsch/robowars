@@ -68,7 +68,7 @@ class RobotsController < ApplicationController
 
     respond_to do |format|
       if @robot.update_attributes(params[:robot])
-        format.html { redirect_to @robot, notice: 'Robot was successfully updated.' }
+        format.html { redirect_to edit_robot_path(@robot), notice: 'Robot was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

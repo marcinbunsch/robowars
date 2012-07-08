@@ -27,20 +27,30 @@
 }
 
 form.robot {
+  #game-container {
+    float: right;
+    width: 600px;
+  }
+  fieldset {
+    float: left;
+  }
   .controls {
     input, textarea {
       width: 500px;
     }
   }
 
+  .form-actions {
+    clear: both;
+  }
+
   .CodeMirror {
     width: 508px;
-    height: 600px;
     background-color: #fff;
     border: 1px solid #EEE;
   }
   .CodeMirror-scroll {
-    height: auto; 
+    height: 500px;
     overflow: visible;
   }
 }

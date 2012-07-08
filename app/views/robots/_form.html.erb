@@ -1,7 +1,14 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/third-party/raphael-1.4.3.min.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/third-party/underscore-1.0.4.min.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/third-party/base.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/jsrobowar.js"></script>
+<script type="text/javascript" src="/jsrobowar/js/gui.js"></script>
+
 <script src="/codemirror/codemirror.js"></script>
 <link rel="stylesheet" href="/codemirror/codemirror.css">
 
-<%= form_for(@robot, :html =>{ :class => 'robot form-horizontal'}) do |f| %>
+<%= form_for(@robot, :html =>{ :class => 'robot'}) do |f| %>
   <% if @robot.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@robot.errors.count, "error") %> prohibited this robot from being saved:</h2>
@@ -27,6 +34,42 @@
       </div>
     </div>
   </fieldset>
+
+  <div id="game-container">
+
+    <section id="play">
+
+      <div id="game">
+        <div id="arena"></div>
+        <div>
+          <div id="scoreboard"></div>
+        </div>
+      </div>
+
+      <div class="clearfix"></div>
+          <div id="controls">
+            <button id="start">Battle</button>
+            <button id="stop">Halt</button>
+            <input type="checkbox" id="sound" autocomplete="off"/>
+            Enable sound
+          </div>
+
+      <section id="editor">
+        <hr/>
+        <h2>Robot X</h2>
+        <div id="errors"></div>
+        <div id="editors"></div>
+      </section>
+
+      <fieldset id="choices">
+        <legend>Load a robot to test against:</legend>
+        <ol></ol>
+      </fieldset>
+
+    </section>
+
+  </div>
+
   <div class="form-actions">
     <div class="btn-group">
       <%= f.submit "Save", :class => 'btn btn-primary' %>
@@ -37,6 +80,6 @@
 <script type="text/javascript">
   var myTextArea = document.getElementById('robot_code');
   var myCodeMirror = CodeMirror.fromTextArea(myTextArea, {
-    lineNumbers: true   
+    lineNumbers: true
   });
 </script>
