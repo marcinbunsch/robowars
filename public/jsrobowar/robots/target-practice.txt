@@ -1,0 +1,7 @@
+{
+    Energy: 150, Damage: 150, Shield: 0, CPU: 15, Bullets: normal
+}
+
+Main:
+  Main jump
+
