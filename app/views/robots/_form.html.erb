@@ -83,9 +83,39 @@
     </div>
   </div>
 <% end %>
+<link type="text/css" href="/codemirror/theme/cobalt.css" rel="stylesheet" />
+<link type="text/css" href="/codemirror/theme/elegant.css" rel="stylesheet" />
+<link type="text/css" href="/codemirror/theme/monokai.css" rel="stylesheet" />
+<link type="text/css" href="/codemirror/theme/neat.css" rel="stylesheet" />
+
 <script type="text/javascript">
   var myTextArea = document.getElementById('robot_code');
+
+  CodeMirror.defineMode("robotalk", function() {
+    var registers = /^(speedx|speedy|aim|range|fire)\'*/i;
+    var keywords = /^(if|store|return|jump)/i
+    var labels = /^(\w+):/
+    return {
+      token: function(stream) {
+        if (found = stream.match(registers)) {
+          return 'string'
+        } else if (found = stream.match(/\d+/)) {
+          return 'number';
+        } else if (found = stream.match(keywords)) {
+          return "keyword"
+        } else if (found = stream.match(labels)) {
+          return "link"
+        } else {
+         var char = stream.next();
+        }
+        // stream.skipToEnd();
+      }
+    };
+  });
+
   var myCodeMirror = CodeMirror.fromTextArea(myTextArea, {
-    lineNumbers: true
+    lineNumbers: true,
+    mode: 'robotalk',
+    theme: 'neat'
   });
 </script>
