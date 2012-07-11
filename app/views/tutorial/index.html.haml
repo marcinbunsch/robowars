@@ -1,10 +1,76 @@
 %h1 Robowars Tutorial
 
+%h3 1. Język
 
-%h2 1. Język
-%h2 2. Poruszanie się
-%h2 3. Strzelanie
-%h2 4. Pętla
+%p RoboTalk jest językiem opartym na stosie.
+
+= image_tag "/assets/tutorial/stack-of-books.jpg", :width => 200
+
+%p Stos - struktura danych.
+
+= image_tag "/assets/tutorial/stack.png", :width => 200
+
+%p
+  Operacje na stosie:
+  %ul
+    %li włóż (push), czyli wkładanie jednego elementu na wierzch
+    %li zdejmij (pop), czyli zdejmowanie jednego elementu z wierzchu
+
+%p Odwrotna notacja polska
+
+= image_tag "/assets/tutorial/rpn.png"
+
+%h3 2. Poruszanie się
+
+= image_tag "/assets/tutorial/horizontal.png"
+
+%pre
+  :plain
+    MoveLeft CALL
+    Main JUMP
+
+    Main:
+        X 30 < MoveRight IF
+        X 270 > MoveLeft IF
+        Main JUMP
+
+    MoveLeft:
+        -5 SPEEDX' STORE
+        RETURN
+
+    MoveRight:
+        5 SPEEDX' STORE
+        RETURN
+
+= image_tag "/assets/tutorial/diagonal.png"
+
+%pre
+  :plain
+    MoveLeft CALL
+    MoveUp CALL
+    Main JUMP
+
+    Main:
+        X 30 < MoveRight IF
+        X 270 > MoveLeft IF
+        Y 30 < MoveDown IF
+        Y 270 > MoveUp IF
+        Main JUMP
+    MoveLeft:
+        -5 SPEEDX' STORE
+        RETURN
+    MoveRight:
+        5 SPEEDX' STORE
+        RETURN
+    MoveUp:
+        -5 SPEEDY' STORE
+        RETURN
+    MoveDown:
+        5 SPEEDY' STORE
+        RETURN
+
+%h3 3. Strzelanie
+%h3 4. Pętla
 
 %p Jeżeli nie dodamy petli, program się wykona i zakończy. Dlatego musimy zbudować petlę, która będzie się cały czas wykonywała.
 
