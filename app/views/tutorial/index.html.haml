@@ -174,16 +174,12 @@
 %p Jeżeli tak, skacze przy pomocy call na adres podany przez ostatni element na stosie.
 %p Jeżeli nie, skacze przy pomocy call na adres podany przez przedostatni element na stosie.
 
-%h2 6. Gdzie szukać pomocy
-
 %h3 ifeg
 
 %p Robi to samo co ife, tylko zamiast call wykorzystuje jump, czyli nie zostawia nic na stosie.
 
-%ul
-  %li
-    %a{ :href => 'http://www.stanford.edu/~pch/robowar/tutorial/Tutorial.html'} Tutorial Paula Hansena z przykładowymi robotami
+%h2 6. Gdzie szukać pomocy
 
 %ul
+  %li= link_to "Tutorial Paula Hansena z przykładowymi robotami", "http://www.stanford.edu/~pch/robowar/tutorial/Tutorial.html"
   %li= link_to "RoboWar instructions", "/docs/robowar_instructions.pdf"
-  %li= link_to "RoboWar tutorial", "http://www.stanford.edu/~pch/robowar/tutorial/Tutorial.html"
