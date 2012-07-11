@@ -1,23 +1,21 @@
+%h1 Robowars Tutorial
 
-%h1 Tutorial
 
-
-%h3 1. Język
-%h3 2. Poruszanie się
-%h3 3. Strzelanie
-%h3 4. Pętla
+%h2 1. Język
+%h2 2. Poruszanie się
+%h2 3. Strzelanie
+%h2 4. Pętla
 
 %p Jeżeli nie dodamy petli, program się wykona i zakończy. Dlatego musimy zbudować petlę, która będzie się cały czas wykonywała.
 
-
-%h4 Przykład bez pętli:
+%h3 Przykład bez pętli:
 
 %pre
   :plain
     5 aim + aim' store # obroc robota o 5 stopni
     koniec programu!
 
-%h4 Przyklad:
+%h3 Przyklad:
 %pre
   :plain
     Main:
@@ -26,8 +24,99 @@
       # Program tutaj nigdy nie dotrze
 
 
-%h3 5. Ważne komendy
-%h3 6. Gdzie szukać pomocy
+%h2 5. Ważne komendy
+
+%h3 store
+
+%p Store pozwala zapisac wartosc do rejestru
+
+%h4 Przykład:
+
+%pre
+  :plain
+    # ustaw speedx na 5
+    5 speedx' store
+
+%p Store patrzy na 2 elementy na górze stosu. Przedostatni to wartość, ostatni to rejestr który ma być zaktualizowany.
+
+%h3 jump
+
+%p Jump pozwala na przeskoczenie w inne miejsce w kodzie
+
+%h4 Przykład:
+
+%pre
+  :plain
+    # To jest nieskończona pętla
+    Main:
+      Something jump
+    Something:
+      Main jump
+
+%p jump zczytuje nazwę z góry stosu i przeskakuje do miejsca oznaczonego tą nazwą. WAŻNE: jump nie wkłada adresu powrotnego na stos!!
+
+%h3 call
+
+%p Call pozwala na przeskoczenie w inne miejsce w kodzie
+
+%h4 Przykład:
+
+%pre
+  :plain
+    Main:
+      Accelerate call
+      Main jump
+    AccelerateX:
+      5 speedx + speedx' store
+      return
+
+%p
+  call zczytuje nazwę z góry stosu i przeskakuje do miejsca oznaczonego tą nazwą.
+  %b WAŻNE: call wkłada adres powrotny na stos!!
+  To pozwala na wykorzystanie return
+
+%h3 if
+
+%p Podstawowy warunek. Skacze do oznaczonego miejsca w kodzie jeśli sprawdzana wartość wynosi 1.
+
+%h4 Przykład:
+
+%pre
+  :plain
+    # call shoot if range is greater than 0
+    range 0 > shoot if
+
+%p if ściąga dwa elementy ze stosu. Patrzy czy przedostatni wynosi 1. Jeżeli tak, skacze przy pomocy call na adres podany przez ostatni element na stosie.
+
+%h3 ifg
+
+%p Robi to samo co if, tylko zamiast call wykorzystuje jump, czyli nie zostawia nic na stosie.
+
+%h3 ife
+
+%p if-then-else.
+
+%h4 Przykład:
+
+%pre
+  :plain
+    # call shoot if range is greater than 0
+    range 0 > Shoot LookForTargets if
+
+%p if ściąga trzy elementy ze stosu. Patrzy czy trzeci wynosi 1.
+
+%p Jeżeli tak, skacze przy pomocy call na adres podany przez ostatni element na stosie.
+%p Jeżeli nie, skacze przy pomocy call na adres podany przez przedostatni element na stosie.
+
+%h2 6. Gdzie szukać pomocy
+
+%h3 ifeg
+
+%p Robi to samo co ife, tylko zamiast call wykorzystuje jump, czyli nie zostawia nic na stosie.
+
+%ul
+  %li
+    %a{ :href => 'http://www.stanford.edu/~pch/robowar/tutorial/Tutorial.html'} Tutorial Paula Hansena z przykładowymi robotami
 
 %ul
   %li= link_to "RoboWar instructions", "/docs/robowar_instructions.pdf"
