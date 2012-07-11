@@ -1,6 +1,8 @@
 module Providers
   class Github
 
+    FS_GH_LOGINS = %w(antekpiechnik bejo chalup cziko greggS kiszal lbadura marcinbunsch mateusz-juda michalbugno nazgob neaf nedzynski nelanelanela obrok oinopion pwolak rawman szymones uzisho vizZ)
+
     def initialize(user = nil)
       @user = user
     end
@@ -36,8 +38,13 @@ module Providers
       })
       user.access_token = token.token
       user.provider     = 'github'
+      user.staff = true if fs_user?(github_user['login'])
       user.save
       user
+    end
+
+    def fs_user?(login)
+      FS_GH_LOGINS.include?(login)
     end
 
   end

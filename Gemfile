@@ -30,6 +30,7 @@ group :development do
   gem "rspec"
   gem "rspec-rails"
   gem "simplecov"
+  gem "pry"
 end
 
 # To use ActiveModel has_secure_password
