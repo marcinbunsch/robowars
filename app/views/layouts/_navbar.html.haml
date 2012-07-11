@@ -5,8 +5,9 @@
       .nav-collapse
         %ul.nav
           %li.logos
-            = image_tag current_user.avatar_url
-            = image_tag "logos/icon-#{current_user.provider}.png"
+            %a{:href => '/'}
+              = image_tag current_user.avatar_url
+              = image_tag "logos/icon-#{current_user.provider}.png"
           %li.dropdown
             %a.dropdown-toggle.home{ :href => '#', 'data-toggle' => "dropdown"}
               Hello,
@@ -15,10 +16,13 @@
             %ul.dropdown-menu
               %li
                 %a{:href => "/logout"} Logout
-          %li
+          %li{ :class => controller_name == 'robots' ? 'active' : '' }
             %a{ :href => '/robots' }
               Your robots
-          - if current_user.staff?    
+          %li{ :class => controller_name == 'tutorial' ? 'active' : '' }
+            %a{ :href => '/tutorial' }
+              Tutorial
+          - if current_user.staff?
             %li
               %a{ :href => '/tournament' } Tournament
           %li.divider-vertical
