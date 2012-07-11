@@ -11,14 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706153038) do
+ActiveRecord::Schema.define(:version => 20120711152010) do
 
   create_table "robots", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
     t.text     "code"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "ready",      :default => false
   end
 
   create_table "users", :force => true do |t|
@@ -26,8 +27,9 @@ ActiveRecord::Schema.define(:version => 20120706153038) do
     t.string   "avatar_url"
     t.string   "provider"
     t.string   "access_token"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+    t.boolean  "staff",        :default => false
   end
 
 end

@@ -15,6 +15,10 @@
   <%= @robot.code %>
 </p>
 
+<p>
+  <b>Tournament ready:</b>
+  <%= @robot.ready? ? 'yes' : 'no' %>
+</p>
 
 <%= link_to 'Edit', edit_robot_path(@robot) %> |
 <%= link_to 'Back', robots_path %>

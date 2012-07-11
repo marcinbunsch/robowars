@@ -5,12 +5,14 @@
   <table class="table table-bordered">
     <tr>
       <th>Name</th>
+      <th>Ready?</th>
       <th class="actions">Actions</th>
     </tr>
 
   <% @robots.each do |robot| %>
     <tr>
       <td class="name"><%= robot.name %></td>
+      <td class="status"><%= robot.ready? ? 'yes' : 'no' %></td>
       <td>
         <div class="btn-group">
           <%= link_to 'Edit', edit_robot_path(robot), :class => 'btn' %>
