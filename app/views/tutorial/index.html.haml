@@ -70,6 +70,25 @@
         RETURN
 
 %h3 3. Strzelanie
+
+Każdy robot na starcie ma do dyspozycji 150 punktów energii do wykorzystania na
+strzelanie. Energia odnawia się — 2 punkty na jednostkę czasu (Chronon).
+
+Poniżej przykład kodu, w którym robot nie zmienia swojego położenia, ale obraca
+się. W przypadku wykrycia celu, robot wystrzeliwuje pocisk o sile 20 punktów obrażeń.
+
+%pre
+  :plain
+    Main:
+        range 0 > shoot if
+        aim 5 + aim' store
+        Main jump
+
+    Shoot:
+        20 fire' store
+        return
+
+
 %h3 4. Pętla
 
 %p Jeżeli nie dodamy petli, program się wykona i zakończy. Dlatego musimy zbudować petlę, która będzie się cały czas wykonywała.
