@@ -92,8 +92,8 @@
   var myTextArea = document.getElementById('robot_code');
 
   CodeMirror.defineMode("robotalk", function() {
-    var registers = /^(speedx|speedy|aim|range|fire)\'*/i;
-    var keywords = /^(if|store|return|jump)/i
+      var registers = /^(bullet|chronon|collision|damage|doppler|energy|hellbore|kills|look|mine|missile|movex|movey|nuke|probe|radar|random|robots|scan|stunner|x|y|speedx|speedy|aim|range|fire)\'*/i;
+    var keywords = /^(store|return|jump|abs|and|arccos|arcsin|arctan|call|chs|cos|cosine|dist|drop|dropall|dup|duplicate|ifeg|ife|ifg|if|jump|inton|intoff|max|min|mod|nop|not|or|return|roll|rti|setint|setparam|sin|sto|store|sqrt|swap|sync|tan|tangent|vstore|vrecall|xor|eor)/i
     var labels = /^(\w+):/
     return {
       token: function(stream) {
