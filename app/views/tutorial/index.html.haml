@@ -6,6 +6,26 @@
 %h3 2. Poruszanie się
 %h3 3. Strzelanie
 %h3 4. Pętla
+
+%p Jezeli nie dodamy petli, program sie wykona i skonczy. Dlatego musimy zbudowac petle, ktora bedzie sie caly czas wykonywala.
+
+
+%h4 Przykład bez pętli:
+
+%pre
+  :plain
+    5 aim + aim' store # obroc robota o 5 stopni
+    koniec programu!
+
+%h4 Przyklad:
+%pre
+  :plain
+    Main:
+      5 aim + aim' store # obroc robota o 5 stopni
+      Main jump # skocz do Main:
+      # Program tutaj nigdy nie dotrze
+
+
 %h3 5. Ważne komendy
 %h3 6. Gdzie szukać pomocy
 
