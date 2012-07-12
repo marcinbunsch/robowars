@@ -80,7 +80,7 @@ $(function() {
       data[result.robot_id] = result.place;
     });
     $.post('/results', { results: data }).success(function(res) {
-      var next_countdown = new Countdown(10);
+      var next_countdown = new Countdown(5);
       next_countdown.onTick = function() {
         var text = "Next battle in " + this.seconds + '...';
         $('.next .countdown').html(text);
