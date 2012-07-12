@@ -26,3 +26,5 @@ coverage
 config/settings.local.yml
 .sass-cache
 .idea
+
+ENVIRONMENT
