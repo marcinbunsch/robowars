@@ -181,23 +181,31 @@ $(function() {
   };
 
   game.onGameOver = function(results) {
+    var data = {};
     _.each(results, function(result) {
        if (result.place === 0) {
          result.place = 1;
        }
       var robot_el = $('#robot-' + result.robot_id);
       robot_el.find('.color').html(result.place);
+      data[result.robot_id] = result.place;
+    });
+    $.post('/results', { results: data }).success(function(res) {
+       $('.arena .next').show();
+    }).error(function() {
+      alert('Error saving results');
     });
   };
 
   CurrentGame = game;
 
-  $('.arena .btn').click(function() {
+  $('.arena .battle').click(function() {
     CurrentGame.start();
     $(this).hide();
   });
 
-  SoundEffects.enable(false)
+  $('.arena .next').hide();
+  SoundEffects.enable(false);
 });
 
 
