@@ -190,7 +190,7 @@ $(document).ready(function() {
     // Load each robot. Bail out if one doesn't compile.
     var tested_code = myCodeMirror.getValue();
     var robot_name = $('#robot_name').val();
-    var robot = load_robot(tested_code, robot_name, ROBOT_COLORS[1]);
+    var robot = load_robot(tested_code, robot_name, ROBOT_COLORS[3]);
     game.add_robot(robot);
     _.each(_.range(ROBOT_SLOTS -1), function(i) {
       var code = $('#code' + i).val();
