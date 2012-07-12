@@ -225,7 +225,7 @@ $(function() {
   countdown.start();
   $('.arena a.next').hide();
   $('.arena a.battle').hide();
-  SoundEffects.enable(false);
+  SoundEffects.enable(true);
 });
 
 function Countdown(seconds) {
