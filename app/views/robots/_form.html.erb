@@ -84,7 +84,7 @@
 
 <script type="text/javascript">
   var myTextArea = document.getElementById('robot_code');
-
+  if (typeof CodeMirror !== 'undefined') {
   CodeMirror.defineMode("robotalk", function() {
       var registers = /^(bullet|chronon|collision|damage|doppler|energy|hellbore|kills|look|mine|missile|movex|movey|nuke|probe|radar|random|robots|scan|stunner|x|y|speedx|speedy|aim|range|fire)\'*/i;
     var keywords = /^(store|return|jump|abs|and|arccos|arcsin|arctan|call|chs|cos|cosine|dist|drop|dropall|dup|duplicate|ifeg|ife|ifg|if|jump|inton|intoff|max|min|mod|nop|not|or|return|roll|rti|setint|setparam|sin|sto|store|sqrt|swap|sync|tan|tangent|vstore|vrecall|xor|eor)/i
@@ -106,6 +106,7 @@
       }
     };
   });
+  };
 
   var readRobotCode = function() {
     <% if @user_agent.index('ipad') %>
@@ -114,9 +115,11 @@
       return myCodeMirror.getValue()
     <% end %>
   }
+  if (typeof CodeMirror !== 'undefined') {
   var myCodeMirror = CodeMirror.fromTextArea(myTextArea, {
     lineNumbers: true,
     mode: 'robotalk',
     theme: 'neat'
   });
+  };
 </script>
