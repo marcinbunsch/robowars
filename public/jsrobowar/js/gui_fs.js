@@ -191,7 +191,16 @@ $(function() {
       data[result.robot_id] = result.place;
     });
     $.post('/results', { results: data }).success(function(res) {
-       $('.arena .next').show();
+      var next_countdown = new Countdown(10);
+      next_countdown.onTick = function() {
+        var text = "Next battle in " + this.seconds + '...';
+        $('.next .countdown').html(text);
+      };
+      next_countdown.onDone = function() {
+        $('.next .countdown').html('');
+        window.location.reload();
+      };
+      next_countdown.start();
     }).error(function() {
       alert('Error saving results');
     });
@@ -204,8 +213,40 @@ $(function() {
     $(this).hide();
   });
 
-  $('.arena .next').hide();
+  var countdown = new Countdown(5);
+  countdown.onTick = function() {
+    var text = "Battle will begin in " + this.seconds + '...';
+    $('.next .countdown').html(text);
+  };
+  countdown.onDone = function() {
+    $('.next .countdown').html('');
+    CurrentGame.start();
+  };
+  countdown.start();
+  $('.arena a.next').hide();
+  $('.arena a.battle').hide();
   SoundEffects.enable(false);
 });
+
+function Countdown(seconds) {
+  var self = this;
+  var interval;
+  this.seconds = seconds;
+  this.onTick = function() {};
+  this.onDone = function() {};
+  var check = function() {
+    if (self.seconds == 0) {
+      clearInterval(interval);
+      self.onDone();
+    } else {
+      self.onTick();
+      self.seconds--;
+    }
+  };
+  this.start = function() {
+    check();
+    interval = setInterval(check, 1000);
+  };
+}
 
 

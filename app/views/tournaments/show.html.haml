@@ -15,7 +15,9 @@
     #arena
     #scoreboard
     %a.btn.btn-danger.btn-large.battle Battle!
-    %a.btn.btn-info.btn-large.next{:href => '/tournament'} Go to next Battle!
+    .next
+      %h2.countdown
+      %a.btn.btn-info.btn-large.next{:href => '/tournament'} Go to next Battle!
 
   .players
     - @robots[2..3].each do |robot|
