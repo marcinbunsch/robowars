@@ -15,7 +15,7 @@ class Robot < ActiveRecord::Base
   POINTS_MAP = {'1' => 4, '2' => 3, '3' => 2, '4' => 0}
 
   def self.draw(amount)
-    self.yoda_draw(amount)
+    self.drunk_draw(amount)
   end
 
   def self.simple_draw(amount)
@@ -48,6 +48,15 @@ class Robot < ActiveRecord::Base
     lowest_tier = lowest_tier.sample(tier_size)
     top_tier = self.ready.offset(offset).least_played
     top_tier = top_tier.sample(tier_size)
+    lowest_tier + top_tier
+  end
+
+  def self.drunk_draw(amount)
+    # 2 that played the least
+    lowest_tier = self.ready.limit(2).least_played
+    lowest_tier = lowest_tier.sample(2)
+    top_tier = self.ready.offset(2).least_played
+    top_tier = top_tier.sample(2)
     lowest_tier + top_tier
   end
 
