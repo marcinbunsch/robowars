@@ -1,0 +1,23 @@
+<div id="ranking">
+  <table id="standings" class="table-bordered table-striped">
+    <thead>
+    <tr class="header">
+      <th class="stats">Score</th>
+      <th class="stats">Matches</th>
+      <th class="robot">Robot</th>
+      <th class="constructor">Constructor</th>
+    </tr>
+    </thead>
+    <% @scores.each do |entry| %>
+        <tr class="entry">
+          <td><%= entry[:score] %></td>
+          <td><%= entry[:matches] %></td>
+          <td><%= entry[:robot_name] %></td>
+          <td class="constructor">
+              <%= image_tag(entry[:avatar_url]) %>
+              <%= entry[:constructor] %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>

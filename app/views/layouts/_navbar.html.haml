@@ -25,4 +25,6 @@
           - if current_user.staff?
             %li
               %a{ :href => '/tournament' } Tournament
+          %li{:class => controller_name == 'leaderboard' ? 'active' : ''}
+            %a{ :href => '/leaderboard' } Leaderboard
           %li.divider-vertical

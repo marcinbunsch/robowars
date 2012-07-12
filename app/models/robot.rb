@@ -11,12 +11,25 @@ class Robot < ActiveRecord::Base
   scope :ready, where(:ready => true)
   scope :least_played, order('results_count ASC')
 
+  # how many points for given rank in a match
+  POINTS_MAP = {'1' => 4, '2' => 3, '3' => 2, '4' => 0}
+
   def self.draw(amount)
     self.simple_draw(amount)
   end
 
   def self.simple_draw(amount)
     self.ready.least_played.limit(4)
+  end
+
+  def score
+    buckets = results.group('rank').count
+
+    calculated_score = 0
+    buckets.each do |bucket,count|
+      calculated_score += (count * POINTS_MAP[bucket.to_s])
+    end
+    calculated_score
   end
 
   # Draw proposed by Yoda (Mateusz Juda)
@@ -34,5 +47,16 @@ class Robot < ActiveRecord::Base
     lowest_tier + top_tier
   end
 
+  def self.leaderboard
+    scores = Robot.all.map do |robot|
+      {:robot_id => robot.id,
+       :robot_name => robot.name,
+       :matches => robot.results.count,
+       :score => robot.score,
+       :avatar_url => robot.user.avatar_url,
+       :constructor => robot.user.username}
+    end
+    scores.sort {|a,b| a[:score] <=> b[:score]}.reverse
+  end
 end
 
