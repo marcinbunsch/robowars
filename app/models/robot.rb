@@ -4,10 +4,15 @@ class Robot < ActiveRecord::Base
   validates :name, :presence => true
   validates :code, :presence => true
 
-  has_many :fights
-  has_many :duels, :through => :fights
+  has_many :results, :counter_cache => true
+  has_many :duels, :through => :results
   belongs_to :user
 
   scope :ready, where(:ready => true)
+
+  def self.draw(amount)
+
+  end
+
 end
 

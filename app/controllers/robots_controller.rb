@@ -1,11 +1,13 @@
 class RobotsController < ApplicationController
-  # GET /robots
-  # GET /robots.json
-  def index
-    @robots = scope
+
+  before_filter :require_staff, :only => [:draw]
+
+  def draw
+    count = params[:count].to_i
+    count = 4 if count < 1 || count > 4
+    @robots = Robot.draw(count)
 
     respond_to do |format|
-      format.html # index.html.erb
       format.json { render json: @robots }
     end
   end
@@ -28,6 +30,18 @@ class RobotsController < ApplicationController
       format.html # show.html.erb
     end
   end
+
+  # GET /robots
+  # GET /robots.json
+  def index
+    @robots = scope
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @robots }
+    end
+  end
+
 
   # GET /robots/new
   # GET /robots/new.json

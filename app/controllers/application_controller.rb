@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def require_staff
+    redirect_to "/" unless current_user.staff?
+  end
+
 end
