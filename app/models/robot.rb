@@ -4,6 +4,10 @@ class Robot < ActiveRecord::Base
   validates :name, :presence => true
   validates :code, :presence => true
 
+  has_many :fights
+  has_many :duels, :through => :fights
+  belongs_to :user
+
   scope :ready, where(:ready => true)
 end
 

@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120711152010) do
+ActiveRecord::Schema.define(:version => 20120711183344) do
+
+  create_table "duels", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "results", :force => true do |t|
+    t.integer  "duel_id"
+    t.integer  "robot_id"
+    t.integer  "rank"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "robots", :force => true do |t|
     t.integer  "user_id"
