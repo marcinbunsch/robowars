@@ -54,6 +54,7 @@ class RobotsController < ApplicationController
   # GET /robots/new
   # GET /robots/new.json
   def new
+    @user_agent = request.env['HTTP_USER_AGENT'].downcase
     @robot = scope.new
 
     respond_to do |format|
