@@ -154,6 +154,7 @@ var updateRobotStatus = function(robot) {
     robot.energy = 0;
     robot_el.css({ 'opacity': 0.5 })
   }
+  robot_el.find('.color').html(robot.place);
   status_el.find('.energy').css({width: (robot.energy / 150) * 100 + '%'})
   status_el.find('.damage').css({width: (robot.damage / 100) * 100 + '%'})
   robot_el.find('.color').css({'background-color': robot.color });
@@ -177,6 +178,16 @@ $(function() {
   game.onUpdate = function(data) {
     $('.arena h1 span').text(data.chronons);
     _.each(data.robots, updateRobotStatus);
+  };
+
+  game.onGameOver = function(results) {
+    _.each(results, function(result) {
+       if (result.place === 0) {
+         result.place = 1;
+       }
+      var robot_el = $('#robot-' + result.robot_id);
+      robot_el.find('.color').html(result.place);
+    });
   };
 
   CurrentGame = game;

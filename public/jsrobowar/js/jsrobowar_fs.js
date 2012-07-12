@@ -191,7 +191,7 @@ var Game = Class.extend({
   },
 
   add_robot: function(robot) {
-    this.results[robot.name] = {robot_id:robot.name,place:0}
+    this.results[robot.name] = {robot_id:robot.id,place:0}
     robot.arena = this.arena;
 
     // Position randomly but away from the edges and not on top of another
@@ -210,6 +210,20 @@ var Game = Class.extend({
 
     this.actors[LAYER_ROBOTS].push(new RobotView(this.paper, robot));
     this.robots.push(robot);
+  },
+
+  timeout: function() {
+     var place = this.robots.length;
+     _.each(this.results, function(result) {
+       if (result.place === 0) {
+         result.place = place;
+       }
+     });
+     var self = this;
+     _.each(this.robots, function(robot) {
+       self.remove_robot(robot);
+     });
+     this.onGameOver(this.results);
   },
 
   start: function(opt_callback) {
@@ -235,6 +249,11 @@ var Game = Class.extend({
       // Increment chronons.
       self.chronons++;
 
+      if (self.chronons > 998) {
+        self.timeout();
+        return;
+      }
+
       // Update robots.
       for (var i = 0, robot; robot = self.robots[i]; i++) {
         var x = robot.x, y = robot.y, r = robot.radius;
@@ -250,6 +269,7 @@ var Game = Class.extend({
 
         if (!robot.is_running) {
           var place = self.robots.length;
+          robot.place = place;
           self.results[robot.name]['place'] = place;
           self.remove_robot(robot);  // Remove robot if dead.
         }
@@ -2160,6 +2180,7 @@ var Scoreboard = Class.extend({
   },
 
   declare_winner: function() {
+    if (this.game.onGameOver) this.game.onGameOver(this.game.results)
     for (var i = 0, label; label = this.labels[i]; i++) {
       var robot = label['robot'];
       if (label['robot'].is_running) {
