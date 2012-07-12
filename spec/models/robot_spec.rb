@@ -29,6 +29,7 @@ describe Robot do
       g = FactoryGirl.create :robot, :results_count => 4
       h = FactoryGirl.create :robot, :results_count => 4
       results = Robot.yoda_draw(4)
+      results.size.should == 4
       [a,b].should include(results[0])
       [a,b].should include(results[1])
       [c,d,e,f,g,h].should include(results[2])

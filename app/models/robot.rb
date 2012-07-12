@@ -15,7 +15,7 @@ class Robot < ActiveRecord::Base
   POINTS_MAP = {'1' => 4, '2' => 3, '3' => 2, '4' => 0}
 
   def self.draw(amount)
-    self.simple_draw(amount)
+    self.yoda_draw(amount)
   end
 
   def self.simple_draw(amount)
@@ -39,11 +39,11 @@ class Robot < ActiveRecord::Base
   def self.yoda_draw(amount)
     tier_size = amount/2
     all_robot_count = self.ready.count
-    offset = (all_robot_count / 4.0).floor
+    offset = (all_robot_count / 4.0).ceil
     lowest_tier = self.ready.limit(offset).least_played
-    lowest_tier.sample(tier_size)
+    lowest_tier = lowest_tier.sample(tier_size)
     top_tier = self.ready.offset(offset).least_played
-    top_tier.sample(tier_size)
+    top_tier = top_tier.sample(tier_size)
     lowest_tier + top_tier
   end
 
