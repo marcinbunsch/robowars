@@ -2,6 +2,7 @@
   <table id="standings" class="table-bordered table-striped">
     <thead>
     <tr class="header">
+      <th class="stats">Place</th>
       <th class="stats">Score</th>
       <th class="stats">1st</th>
       <th class="stats">2nd</th>
@@ -12,8 +13,9 @@
       <th class="constructor">Constructor</th>
     </tr>
     </thead>
-    <% @scores.each do |entry| %>
+    <% @scores.each_with_index do |entry,index| %>
         <tr class="entry">
+          <td><%= index + 1 %></td>
           <td><%= entry[:score] %></td>
           <td><%= entry[:first] %></td>
           <td><%= entry[:second] %></td>
