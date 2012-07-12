@@ -234,8 +234,8 @@ $(document).ready(function() {
   // Auto-start demo mode ----------------------------------------------------
 
   $('#choice0').val('target-practice').change();
-  $('#choice1').val('target-practice').change();
-  $('#choice2').val('target-practice').change();
+  $('#choice1').val('moving-target-practice').change();
+  $('#choice2').val('diagonal-target-practice').change();
 
   //# _.delay(function() {$('#start').click()}, 600);
 
