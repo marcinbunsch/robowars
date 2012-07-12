@@ -22,12 +22,17 @@ class Robot < ActiveRecord::Base
     self.ready.least_played.limit(4)
   end
 
-  def score
-    buckets = results.group('rank').count
+  def stats
+    blank_slate = {1 => 0, 2 => 0, 3 => 0, 4 => 0}
+    stats = results.group('rank').count
+    stats.empty? ? blank_slate : stats
+  end
 
+  def score
     calculated_score = 0
-    buckets.each do |bucket,count|
+    stats.each do |bucket,count|
       calculated_score += (count || 0) * (POINTS_MAP[bucket.to_s] || 0)
+      calculated_score += (count * POINTS_MAP[bucket.to_s])
     end
     calculated_score
   end
@@ -49,9 +54,14 @@ class Robot < ActiveRecord::Base
 
   def self.leaderboard
     scores = Robot.all.map do |robot|
+      current_stats = robot.stats
       {:robot_id => robot.id,
        :robot_name => robot.name,
        :matches => robot.results.count,
+       :first => robot.stats[1].to_i,
+       :second => robot.stats[2].to_i,
+       :third => robot.stats[3].to_i,
+       :fourth => robot.stats[4].to_i,
        :score => robot.score,
        :avatar_url => robot.user.avatar_url,
        :constructor => robot.user.username}

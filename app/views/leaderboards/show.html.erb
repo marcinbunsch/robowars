@@ -3,6 +3,10 @@
     <thead>
     <tr class="header">
       <th class="stats">Score</th>
+      <th class="stats">1st</th>
+      <th class="stats">2nd</th>
+      <th class="stats">3rd</th>
+      <th class="stats">4th</th>
       <th class="stats">Matches</th>
       <th class="robot">Robot</th>
       <th class="constructor">Constructor</th>
@@ -11,11 +15,17 @@
     <% @scores.each do |entry| %>
         <tr class="entry">
           <td><%= entry[:score] %></td>
+          <td><%= entry[:first] %></td>
+          <td><%= entry[:second] %></td>
+          <td><%= entry[:third] %></td>
+          <td><%= entry[:fourth] %></td>
           <td><%= entry[:matches] %></td>
           <td><%= entry[:robot_name] %></td>
-          <td class="constructor">
-              <%= image_tag(entry[:avatar_url]) %>
+          <td>
+            <%= image_tag(entry[:avatar_url]) %>
+            <div class="robot-owner">
               <%= entry[:constructor] %>
+            </div>
           </td>
         </tr>
     <% end %>
