@@ -32,7 +32,6 @@ class Robot < ActiveRecord::Base
     calculated_score = 0
     stats.each do |bucket,count|
       calculated_score += (count || 0) * (POINTS_MAP[bucket.to_s] || 0)
-      calculated_score += (count * POINTS_MAP[bucket.to_s])
     end
     calculated_score
   end
