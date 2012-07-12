@@ -1,26 +1,4 @@
 <div class="robots">
-  <%= link_to 'New Robot', new_robot_path, :class => 'create btn btn-primary' %>
-  <h1>Your robots</h1>
-
-  <table class="table table-bordered">
-    <tr>
-      <th>Name</th>
-      <th>Ready?</th>
-      <th class="actions">Actions</th>
-    </tr>
-
-  <% @robots.each do |robot| %>
-    <tr>
-      <td class="name"><%= robot.name %></td>
-      <td class="status"><%= robot.ready? ? 'yes' : 'no' %></td>
-      <td>
-        <div class="btn-group">
-          <%= link_to 'Edit', edit_robot_path(robot), :class => 'btn' %>
-          <%= link_to 'Destroy', robot, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %>
-      </div>
-      </td>
-    </tr>
-  <% end %>
-  </table>
+  <%= render 'robot_dashboard' %>
 </div>
 

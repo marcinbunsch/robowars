@@ -12,6 +12,14 @@ class RobotsController < ApplicationController
     end
   end
 
+  def activate
+    @robot = scope.find(params[:id])
+    current_user.robots.update_all(:ready => false)
+    @robot.ready = true
+    @robot.save
+    @robots = current_user.robots.reload.order('id desc')
+  end
+
   # GET /robots/1
   # GET /robots/1.json
   def show
@@ -34,7 +42,7 @@ class RobotsController < ApplicationController
   # GET /robots
   # GET /robots.json
   def index
-    @robots = scope
+    @robots = scope.order('id desc')
 
     respond_to do |format|
       format.html # index.html.erb

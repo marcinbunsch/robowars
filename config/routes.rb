@@ -3,6 +3,9 @@ Hackstrap::Application.routes.draw do
   get "/tutorial" => "tutorial#index"
   resource :tournament
   resources :robots do
+    member do
+      put :activate
+    end
     collection do
       get :draw
     end
