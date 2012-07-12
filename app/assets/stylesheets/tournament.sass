@@ -1,0 +1,50 @@
+@import "mixins.sass"
+.tournament
+
+  .players
+    margin-top: 60px
+    width: 380px
+    float: left
+
+    .player
+      .color
+        float: right
+        width: 30px
+        height: 30px
+        background-color: black
+      padding: 5px
+      background-color: #fff
+      @include rounded(10px)
+      border: 1px solid #ccc
+      margin-bottom: 10px
+      clear: both
+      .info
+        height: 60px
+        line-height: 60px
+        img
+          float: left
+          width: 60px
+          @include rounded(40px)
+          box-shadow: 2px 2px 2px #999
+          position: relative
+          margin-right: 10px
+      .status
+        clear: both
+        .energy
+          margin: 10px 0px
+          height: 10px
+          background-color: blue
+        .damage
+          margin: 10px 0px
+          height: 10px
+          background-color: green
+
+  .arena
+    width: 370px
+    float: left
+    text-align: center
+
+    #arena
+      float: none
+    #scoreboard
+      display: none

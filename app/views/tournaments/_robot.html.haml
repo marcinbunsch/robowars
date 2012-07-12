@@ -1,0 +1,9 @@
+.player{ :id => "robot-#{robot.id}" }
+  .color
+  .info
+    %img{:src => robot.user.avatar_url}
+    %h2= robot.name
+    %h4= robot.user.username
+  .status
+    .damage
+    .energy

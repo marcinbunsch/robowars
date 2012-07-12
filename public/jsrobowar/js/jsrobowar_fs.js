@@ -165,6 +165,7 @@ var Game = Class.extend({
     this.paper = Raphael(arena_el, 300, 300);
     this.scoreboard = new Scoreboard(scoreboard_el, this);
     this.clear();
+    this.results = {};
   },
 
   clear: function() {
@@ -190,6 +191,7 @@ var Game = Class.extend({
   },
 
   add_robot: function(robot) {
+    this.results[robot.name] = {robot_id:robot.name,place:0}
     robot.arena = this.arena;
 
     // Position randomly but away from the edges and not on top of another
@@ -248,7 +250,7 @@ var Game = Class.extend({
 
         if (!robot.is_running) {
           var place = self.robots.length;
-          gui.game_results[robot.name]['place'] = place;
+          self.results[robot.name]['place'] = place;
           self.remove_robot(robot);  // Remove robot if dead.
         }
 
@@ -2075,6 +2077,15 @@ var Scoreboard = Class.extend({
     this.paper.clear();
   },
 
+  updateGame: function(robots) {
+    if (this.game.onUpdate) {
+      this.game.onUpdate({
+        chronons: this.game.chronons,
+        robots: robots
+      });
+    }
+  },
+
   start: function() {
     var p = this.paper;
     p.rect(0, 0, p.width, p.height).attr({ fill: 'white', stroke: null });
@@ -2106,6 +2117,7 @@ var Scoreboard = Class.extend({
 
     // Draw a box in the robot's color with a few fields.
     var labels = [];
+    var robots = [];
     for (var i = 0, robot; robot = this.game.robots[i]; i++) {
       p.rect(0, y - PAD, p.width, PAD * 4)
           .attr({fill: robot.color, stroke: null});
@@ -2120,15 +2132,19 @@ var Scoreboard = Class.extend({
       });
 
       advance(4);
+      robots.push(robot)
     }
 
+    this.updateGame(robots)
     this.labels = labels;
   },
 
   update: function() {
+    var robots = []
     this.counter.attr('text', 'Chronons: ' + this.game.chronons);
     for (var i = 0, label; label = this.labels[i]; i++) {
       var robot = label['robot'];
+      robots.push(robot)
       label['energy'].attr('text', 'Energy: ' + robot.energy);
       label['damage'].attr('text', 'Damage: ' + robot.damage);
       label['shield'].attr('text', 'Shield: ' + robot.shield);
@@ -2140,6 +2156,7 @@ var Scoreboard = Class.extend({
         robot.is_running ? 'alive' :
         'DEAD'));
     }
+    this.updateGame(robots)
   },
 
   declare_winner: function() {

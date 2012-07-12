@@ -72,7 +72,6 @@ gui.setup_game = function() {
   $.get('/robots.json', function(robots) {
     _.each(_.range(gui.settings.robot_slots), function(i) {
       var robot = robots[i];
-      gui.game_results[robot.name] = {robot_id:robot.id, place:0};
       var code = robot.code.replace(/#/gm,'');
       var robot = gui.load_robot(code, robot.name, gui.robot_colors[i]);
       gui.game.add_robot(robot);
@@ -82,7 +81,9 @@ gui.setup_game = function() {
 };
 
 $(document).ready(function() {
+  return
   gui.game = new Game($('#arena')[0], $('#scoreboard')[0]);
+  gui.game.scoreboard.start();
   $("#draw").on('click', gui.setup_game);
 
   gui.set_section(document.location.hash.replace(/\W/g, '') || 'play');
@@ -128,3 +129,64 @@ $(document).ready(function() {
   //# _.delay(function() {$('#start').click()}, 600);
 
 });
+
+var loadRobot = function(bot, color) {
+  var program = new Program();
+  program.parse(bot.code);
+  var robot = new Robot(bot.name, color, program);
+  robot.id = bot.id;
+  robot.color = color;
+  return robot;
+};
+//  if (program.errors) {
+//    alert(name + " failed to start\nReason:\n" +program.errors);
+//    // reveal_editor(i, program.errors);
+//    return;
+//  }
+
+var updateRobotStatus = function(robot) {
+  var robot_el = $('#robot-' + robot.id);
+  var status_el = $('#robot-' + robot.id + ' .status');
+  // status_el.text("Damage: "+robot.damage + " Energy: " + robot.energy + " Status: " + robot.is_running);
+  if (!robot.is_running && !robot.marked_as_dead) {
+    robot.marked_as_dead = true;
+    robot.damage = 0;
+    robot.energy = 0;
+    robot_el.css({ 'opacity': 0.5 })
+  }
+  status_el.find('.energy').css({width: (robot.energy / 150) * 100 + '%'})
+  status_el.find('.damage').css({width: (robot.damage / 100) * 100 + '%'})
+  robot_el.find('.color').css({'background-color': robot.color });
+};
+
+var CurrentGame;
+$(function() {
+  var COLORS = ['#0ff', '#ff0', '#f99', '#0f0', '#f0f'];
+  var robots = JSON.parse($('#robots').text());
+  if (robots.length < 4) {
+    // less than 4, should we fight?
+  }
+  var game = new Game($('#arena')[0], $('#scoreboard')[0]);
+
+  _.each(robots, function(bot) {
+    var robot = loadRobot(bot, COLORS.shift());
+    game.add_robot(robot);
+    updateRobotStatus(robot)
+  });
+
+  game.onUpdate = function(data) {
+    $('.arena h1 span').text(data.chronons);
+    _.each(data.robots, updateRobotStatus);
+  };
+
+  CurrentGame = game;
+
+  $('.arena .btn').click(function() {
+    CurrentGame.start();
+    $(this).hide();
+  });
+
+  SoundEffects.enable(false)
+});
+
+

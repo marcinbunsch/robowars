@@ -1,0 +1,28 @@
+%script{:src => "/jsrobowar/js/third-party/raphael-1.4.3.min.js", :type => "text/javascript"}
+%script{:src => "/jsrobowar/js/third-party/underscore-1.0.4.min.js", :type => "text/javascript"}
+%script{:src => "/jsrobowar/js/third-party/base.js", :type => "text/javascript"}
+%script{:src => "/jsrobowar/js/jsrobowar_fs.js", :type => "text/javascript"}
+%script{:src => "/jsrobowar/js/gui_fs.js", :type => "text/javascript"}
+
+.tournament
+  .players
+    - @robots[0..1].each do |robot|
+      = render :partial => 'robot', :locals => { :robot => robot }
+  .arena
+    %h1
+      Chronon:
+      %span 0
+    #arena
+    #scoreboard
+    %a.btn.btn-danger.btn-large Battle!
+
+  .players
+    - @robots[2..3].each do |robot|
+      = render :partial => 'robot', :locals => { :robot => robot }
+
+
+.clearfix
+
+%script#robots{:type => "application/json"}
+  = raw @robots.to_json
+
