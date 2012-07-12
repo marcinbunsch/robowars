@@ -1,0 +1,22 @@
+MoveLeft CALL
+MoveUp CALL
+Main JUMP
+
+Main:
+    X 30 < MoveRight IF
+    X 270 > MoveLeft IF
+    Y 30 < MoveDown IF
+    Y 270 > MoveUp IF
+    Main JUMP
+MoveLeft:
+    -5 SPEEDX' STORE
+    RETURN
+MoveRight:
+    5 SPEEDX' STORE
+    RETURN
+MoveUp:
+    -5 SPEEDY' STORE
+    RETURN
+MoveDown:
+    5 SPEEDY' STORE
+    RETURN

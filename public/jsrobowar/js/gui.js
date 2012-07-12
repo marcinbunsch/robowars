@@ -54,7 +54,9 @@ $(document).ready(function() {
   var ROBOT_COLORS = ['#0ff', '#ff0', '#f99', '#0f0', '#f0f'];
   var ROBOT_CHOICES = [
     ['Development robots', [
-      ['target-practice', 'Target Practice']
+      ['target-practice', 'Target Practice'],
+      ['moving-target-practice', 'Moving Target Practice'],
+      ['diagonal-target-practice', 'Diagonal Target Practice']
     ]],
     ['Tutorial robots', [
       ['corner-hopper', 'Corner Hopper'],
@@ -109,7 +111,7 @@ $(document).ready(function() {
 
     // Create the drop-down menu.
     var select = $('<select/>').attr('id', 'choice' + i);
-    select.append($('<option/>').text('Choose a robot...').attr('value', ''));
+    select.append($('<option/>').text('No robot').attr('value', ''));
     for (var j = 0, group; group = ROBOT_CHOICES[j]; j++) {
       var optgroup = $('<optgroup/>').attr('label', group[0]);
       for (var k = 0, choice; choice = group[1][k]; k++) {
@@ -138,9 +140,11 @@ $(document).ready(function() {
     // Load robot code into the editor when a robot is selected.
     select.change(function() {
       var name = $(this).val();
+      if (name == '') {
+        textarea.val('');
+      }
       if (name) {
         var path = '/jsrobowar/robots/' + name + '.txt';
-        textarea.val('(Loading ' + path + ')');
         textarea.attr('disabled', 'disabled');
         $.get(path, function(src) {
           textarea.val(src);
@@ -190,6 +194,8 @@ $(document).ready(function() {
     game.add_robot(robot);
     _.each(_.range(ROBOT_SLOTS -1), function(i) {
       var code = $('#code' + i).val();
+      var trimmed = $.trim(code)
+      if (trimmed == '') return;
 
       var robot = load_robot(code, get_robot_name(i), ROBOT_COLORS[i]);
       game.add_robot(robot);
