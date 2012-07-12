@@ -23,8 +23,12 @@
     - @robots[2..3].each do |robot|
       = render :partial => 'robot', :locals => { :robot => robot }
 
+  .clearfix
+  .errors
+
 
 .clearfix
+
 
 %script#robots{:type => "application/json"}
   = raw @robots.to_json

@@ -206,6 +206,10 @@ $(function() {
     });
   };
 
+  game.onError = function(error) {
+    $('.errors').append('<div class="alert alert-danger"><b>'+error.replace("\n", "<br>")+"</b></div>");
+  }
+
   CurrentGame = game;
 
   $('.arena .battle').click(function() {
@@ -213,7 +217,7 @@ $(function() {
     $(this).hide();
   });
 
-  var countdown = new Countdown(5);
+  var countdown = new Countdown(3);
   countdown.onTick = function() {
     var text = "Battle will begin in " + this.seconds + '...';
     $('.next .countdown').html(text);

@@ -1496,7 +1496,8 @@ var Robot = Class.extend({
         var line = this.program.line_numbers[this.last_ptr];
         var instruction = this.program.instructions[this.last_ptr];
         var message = this.name + ' error on line ' + line + ', at ' + instruction;
-        alert(message + "\n\n" + e);
+        var alert_message = message + "\n\n" + e
+        CurrentGame.onError(alert_message)
         console.error(message + ' - ' + e);
         this.is_running = false;
       }
