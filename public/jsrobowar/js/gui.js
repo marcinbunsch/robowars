@@ -50,7 +50,7 @@ $(document).ready(function() {
 
   // Robot choices -----------------------------------------------------------
 
-  var ROBOT_SLOTS = 2;
+  var ROBOT_SLOTS = 4;
   var ROBOT_COLORS = ['#0ff', '#ff0', '#f99', '#0f0', '#f0f'];
   var ROBOT_CHOICES = [
     ['Development robots', [
@@ -228,6 +228,8 @@ $(document).ready(function() {
   // Auto-start demo mode ----------------------------------------------------
 
   $('#choice0').val('target-practice').change();
+  $('#choice1').val('target-practice').change();
+  $('#choice2').val('target-practice').change();
 
   //# _.delay(function() {$('#start').click()}, 600);
 
