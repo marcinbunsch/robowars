@@ -9,15 +9,15 @@
 
   <% @robots.each do |robot| %>
       <tr>
-        <td class="name">
-          <div class="<%= robot.ready? ? 'icon-ok' : ''%>" style="width: 15px;"></div>
+        <td class="name <%= robot.ready? ? 'ready' : ''%>">
+          <span class="<%= robot.ready? ? 'icon-ok' : ''%>">&nbsp;</span>
           <%= robot.name %>
         </td>
         <td>
           <div class="btn-group">
             <%= link_to 'Edit', edit_robot_path(robot), :class => 'btn' %>
             <% unless robot.ready? %>
-              <%= link_to 'Activate', activate_robot_path(robot), :method => 'put', :remote => :true, :class => 'btn' %>
+              <%= link_to 'Activate', activate_robot_path(robot), :method => 'put', :remote => :true, :class => 'btn btn-success' %>
             <% end %>
             <%= link_to 'Destroy', robot, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %>
           </div>
