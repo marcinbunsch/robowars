@@ -74,7 +74,7 @@ class RobotsController < ApplicationController
 
     respond_to do |format|
       if @robot.save
-        format.html { redirect_to @robot, notice: 'Robot was successfully created.' }
+        format.html { redirect_to edit_robot_path(@robot), notice: 'Robot was successfully created.' }
         format.json { render json: @robot, status: :created, location: @robot }
       else
         format.html { render action: "new" }
