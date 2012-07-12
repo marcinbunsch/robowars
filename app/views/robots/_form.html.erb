@@ -3,9 +3,10 @@
 <script type="text/javascript" src="/jsrobowar/js/third-party/base.js"></script>
 <script type="text/javascript" src="/jsrobowar/js/jsrobowar.js"></script>
 <script type="text/javascript" src="/jsrobowar/js/gui.js"></script>
-
-<script src="/codemirror/codemirror.js"></script>
-<link rel="stylesheet" href="/codemirror/codemirror.css">
+<% unless @user_agent.index('ipad') %>
+  <script src="/codemirror/codemirror.js"></script>
+  <link rel="stylesheet" href="/codemirror/codemirror.css">
+<% end %>
 
 <%= form_for(@robot, :html =>{ :class => 'robot'}) do |f| %>
   <% if @robot.errors.any? %>

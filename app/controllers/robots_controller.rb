@@ -64,6 +64,7 @@ class RobotsController < ApplicationController
 
   # GET /robots/1/edit
   def edit
+    @user_agent = request.env['HTTP_USER_AGENT'].downcase
     @robot = scope.find(params[:id])
   end
 
