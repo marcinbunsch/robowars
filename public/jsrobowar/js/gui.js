@@ -188,7 +188,7 @@ $(document).ready(function() {
 
     // Get tested robot code
     // Load each robot. Bail out if one doesn't compile.
-    var tested_code = myCodeMirror.getValue();
+    var tested_code = readRobotCode(); 
     var robot_name = $('#robot_name').val();
     var robot = load_robot(tested_code, robot_name, ROBOT_COLORS[3]);
     game.add_robot(robot);

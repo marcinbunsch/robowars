@@ -107,6 +107,13 @@
     };
   });
 
+  var readRobotCode = function() {
+    <% if @user_agent.index('ipad') %>
+      return myTextArea.value
+    <% else %>
+      return myCodeMirror.getValue()
+    <% end %>
+  }
   var myCodeMirror = CodeMirror.fromTextArea(myTextArea, {
     lineNumbers: true,
     mode: 'robotalk',
