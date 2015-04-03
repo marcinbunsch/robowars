@@ -6,9 +6,9 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    - if controller_name != 'sessions'
+    - if current_user && controller_name != 'sessions'
       = render "layouts/navbar"
-      
+
     .container
       - if flash[:notice]
         .alert.alert-success
