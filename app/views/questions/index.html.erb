@@ -1,0 +1,21 @@
+<div class="questions">
+<div class="pull-right">
+<%= link_to 'Ask a question', new_question_path, class: 'btn btn-primary' %>
+</div>
+<h1>Listing questions</h1>
+
+<% @questions.each do |question| %>
+  <div class="question">
+    <h2><%= question.question %></h2>
+    <% if question.answer.nil? %>
+      <p>Not answered yet</p>
+    <% else %>
+      <p><%= question.answer %></p>
+    <% end %>
+    <% if user_can_modify_question?(question) %>
+      <%= link_to 'Edit', edit_question_path(question), class: 'btn' %>
+      <%= link_to 'Remove', question, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %>
+    <% end %>
+  </div>
+<% end %>
+</div;

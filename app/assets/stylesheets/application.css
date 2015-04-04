@@ -43,3 +43,12 @@ body {
 .navbar .dropdown-menu::after {
   border: 0;
 }
+
+.questions h1 {
+  margin-bottom: 20px;
+
+}
+.questions input[type="text"] {
+
+  width: 100%;
+}

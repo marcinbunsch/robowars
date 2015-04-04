@@ -1,5 +1,8 @@
 Hackstrap::Application.routes.draw do
 
+  resources :questions
+
+
   get "/tutorial" => "tutorial#index"
   resource :tournament
   resource :leaderboard

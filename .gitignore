@@ -28,3 +28,5 @@ config/settings.local.yml
 .idea
 
 ENVIRONMENT
+
+/public/assets
