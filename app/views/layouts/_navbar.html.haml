@@ -22,6 +22,9 @@
           %li{ :class => controller_name == 'tutorial' ? 'active' : '' }
             %a{ :href => '/tutorial' }
               Tutorial
+          %li{ :class => controller_name == 'questions' ? 'active' : '' }
+            %a{ :href => '/questions' }
+              FAQ
           - if current_user.staff?
             %li
               %a{ :href => '/tournament' } Tournament

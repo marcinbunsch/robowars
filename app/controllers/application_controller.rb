@@ -4,8 +4,12 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user
 
   def authenticate_user
-    @current_user = User.find_by_id(session[:user_id])
+    find_user
     redirect_to '/login' unless @current_user
+  end
+
+  def find_user
+    @current_user = LoginUserFinder.new(session[:user_id]).find
   end
 
   def current_user
