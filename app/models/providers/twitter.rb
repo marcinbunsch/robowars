@@ -6,7 +6,7 @@ module Providers
     end
 
     def client
-      OAuth::Consumer.new(Rails.configuration.twitter.token, Rails.configuration.twitter.secret, { 
+      OAuth::Consumer.new(Rails.configuration.twitter.token, Rails.configuration.twitter.secret, {
         :site => "http://api.twitter.com",
         :authorize_url => 'http://api.twitter.com/oauth/authenticate',
         :scheme => :header
@@ -14,7 +14,7 @@ module Providers
     end
 
     def get_request_token(request)
-      client.get_request_token(:oauth_callback => redirect_uri(request))
+      client.get_request_token(:oauth_callback => "http://webmuses-robowar.herokuapp.com/oauth/twitter/callback")
     end
 
     def redirect_uri(request)
