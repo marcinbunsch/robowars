@@ -7,6 +7,7 @@ class Oauth::TwitterController < ApplicationController
     redirect_to request_token.authorize_url
   rescue => e
     Rails.logger.info e.message
+    Rails.logger.info e.request.response.body
     redirect_to '/login'
   end
 
@@ -24,6 +25,7 @@ class Oauth::TwitterController < ApplicationController
     end
   rescue => e
     Rails.logger.info e.message
+    Rails.logger.info e.request.response.body
     redirect_to '/login'
   end
 
