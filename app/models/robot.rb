@@ -61,7 +61,7 @@ class Robot < ActiveRecord::Base
   end
 
   def self.leaderboard
-    scores = Robot.all.map do |robot|
+    scores = Robot.where(:ready => true).all.map do |robot|
       current_stats = robot.stats
       {:robot_id => robot.id,
        :robot_name => robot.name,
