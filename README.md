@@ -26,6 +26,17 @@ MOCK_USER=staff bundle exec rails s
 
 Tests are in rspec, the whole app is not covered, but there's enough for you to check out how you can test additions.
 
+### Setting up on heroku
+
+First, get the Heroku Toolbelt. Then:
+
+```bash
+heroku apps:create [NAME]
+heroku run rake db:migrate --app [NAME]
+heroku config:set GITHUB_APP_ID=[github client id] GITHUB_SECRET=[github client secret]
+heroku config:set TWITTER_TOKEN=[github client id] TWITTER_SECRET=[github client secret]
+```
+
 ### License
 
 License is MIT. See LICENSE for details.
