@@ -13,7 +13,7 @@ class Oauth::TwitterController < ApplicationController
 
   def create
     @request_token = session[:request_token]
-    token          = @request_token.get_access_token
+    token          = @request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     Rails.logger.info "request_token: #{token}"
 
     provider = Providers::Twitter.new(current_user)
