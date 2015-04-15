@@ -33,9 +33,19 @@ First, get the Heroku Toolbelt. Then:
 ```bash
 heroku apps:create [NAME]
 heroku run rake db:migrate --app [NAME]
+```
+
+Afterwards, set up a GitHub app with `callback_url` set to https://[NAME].herokuapp.com/oauth/github/callback.
+Then, set up a Twitter app with `callback_url` set to https://[NAME].herokuapp.com/oauth/twitter/callback.
+
+When you have tokens for both apps, run:
+
+```bash
 heroku config:set GITHUB_APP_ID=[github client id] GITHUB_SECRET=[github client secret]
 heroku config:set TWITTER_TOKEN=[github client id] TWITTER_SECRET=[github client secret]
 ```
+
+And then go to https://[NAME].herokuapp.com.
 
 ### License
 
