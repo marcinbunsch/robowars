@@ -26,7 +26,6 @@ describe "questions/_form" do
 
     it "renders question input" do
       render
-      assert_select "label", for: "question_question", count: 1
       assert_select "input#question_question", count: 1
     end
 
