@@ -72,6 +72,7 @@ class RobotsController < ApplicationController
   # POST /robots
   # POST /robots.json
   def create
+    @user_agent = request.env['HTTP_USER_AGENT'].downcase
     @robot = scope.new(params[:robot])
 
     respond_to do |format|
