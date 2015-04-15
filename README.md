@@ -32,6 +32,7 @@ First, get the Heroku Toolbelt. Then:
 
 ```bash
 heroku apps:create [NAME]
+heroku config:set SECRET_KEY_BASE=[secret key]
 heroku run rake db:migrate --app [NAME]
 ```
 
