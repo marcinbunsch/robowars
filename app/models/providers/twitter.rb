@@ -14,7 +14,7 @@ module Providers
     end
 
     def get_request_token(request)
-      client.get_request_token(:oauth_callback => "https://webmuses-robowar.herokuapp.com/oauth/twitter/callback")
+      client.get_request_token(:oauth_callback => redirect_uri(request))
     end
 
     def redirect_uri(request)
