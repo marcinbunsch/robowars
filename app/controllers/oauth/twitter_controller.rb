@@ -13,6 +13,7 @@ class Oauth::TwitterController < ApplicationController
   def create
     @request_token = session[:request_token]
     token          = @request_token.get_access_token
+    Rails.logger.info "request_token: #{token}"
 
     provider = Providers::Twitter.new(current_user)
     if user = provider.find_or_create_user(token, request)
@@ -21,6 +22,9 @@ class Oauth::TwitterController < ApplicationController
     else
       redirect_to '/login', :error => 'Could not log you in, please try again'
     end
+  rescue => e
+    Rails.logger.info e.message
+    redirect_to '/login'
   end
 
 end
