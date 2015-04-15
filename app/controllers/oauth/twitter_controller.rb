@@ -5,6 +5,9 @@ class Oauth::TwitterController < ApplicationController
     request_token = Providers::Twitter.new(current_user).get_request_token(request)
     session[:request_token] = request_token
     redirect_to request_token.authorize_url
+  rescue => e
+    Rails.logger.info e.message
+    redirect_to '/login'
   end
 
   def create
