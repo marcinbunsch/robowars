@@ -28,3 +28,6 @@ group :development do
   gem "pry"
   gem 'test-unit'
 end
+group :production do
+  gem 'rails_serve_static_assets'
+end
