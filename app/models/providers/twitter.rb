@@ -27,7 +27,7 @@ module Providers
     end
 
     def create_user(token)
-      json = token.get("/1/users/show.json?user_id=#{token.params['user_id']}").body
+      json = token.get("/1.1/users/show.json?user_id=#{token.params['user_id']}").body
       twitter_user = JSON.parse(json)
       Rails.logger.info twitter_user.inspect
       user = User.new({
