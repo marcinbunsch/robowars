@@ -1,5 +1,4 @@
 class Robot < ActiveRecord::Base
-  attr_accessible :name, :code
 
   validates :name, :presence => true
   validates :code, :presence => true
@@ -8,8 +7,8 @@ class Robot < ActiveRecord::Base
   has_many :duels, :through => :results
   belongs_to :user
 
-  scope :ready, where(:ready => true)
-  scope :least_played, order('results_count ASC')
+  scope :ready, -> { where(:ready => true) }
+  scope :least_played, -> { order('results_count ASC') }
 
   # how many points for given rank in a match
   POINTS_MAP = {'1' => 4, '2' => 3, '3' => 2, '4' => 0}
@@ -76,5 +75,6 @@ class Robot < ActiveRecord::Base
     end
     scores.sort {|a,b| a[:score] <=> b[:score]}.reverse
   end
+
 end
 

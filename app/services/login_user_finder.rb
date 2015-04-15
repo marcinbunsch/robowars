@@ -15,12 +15,15 @@ class LoginUserFinder
   private
 
   def mock_user
+    @found ||= User.find_by_id(-1)
+    return @found if @found
     u = User.new
     u.id = -1
     u.username = 'developer'
     u.provider = 'twitter'
     u.avatar_url = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_0_reasonably_small.png'
     u.staff = mock_is_staff?
+    u.save
     u
   end
 

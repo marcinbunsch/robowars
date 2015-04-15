@@ -73,7 +73,7 @@ class RobotsController < ApplicationController
   # POST /robots.json
   def create
     @user_agent = request.env['HTTP_USER_AGENT'].downcase
-    @robot = scope.new(params[:robot])
+    @robot = scope.new(robot_params)
 
     respond_to do |format|
       if @robot.save
@@ -92,7 +92,7 @@ class RobotsController < ApplicationController
     @robot = scope.find(params[:id])
 
     respond_to do |format|
-      if @robot.update_attributes(params[:robot])
+      if @robot.update_attributes(robot_params)
         format.html { redirect_to edit_robot_path(@robot), notice: 'Robot was successfully updated.' }
         format.json { head :no_content }
       else
@@ -119,4 +119,9 @@ class RobotsController < ApplicationController
   def scope
     current_user.robots
   end
+
+  def robot_params
+    params.require(:robot).permit(:name, :code)
+  end
+
 end
