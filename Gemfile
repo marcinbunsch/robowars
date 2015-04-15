@@ -9,7 +9,6 @@ gem "choices"
 gem "oauth2"
 gem "oauth"
 gem "haml"
-gem "factory_girl"
 gem "thin"
 gem 'jquery-rails'
 gem "pg"
@@ -22,6 +21,7 @@ group :assets do
 end
 
 group :development do
+  gem "factory_girl"
   gem "rspec"
   gem "rspec-rails"
   gem "simplecov"
