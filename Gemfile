@@ -22,8 +22,8 @@ end
 
 group :development do
   gem "factory_girl"
-  gem "rspec"
-  gem "rspec-rails"
+  gem "rspec", "2.8.0"
+  gem "rspec-rails", "2.8.1"
   gem "simplecov"
   gem "pry"
   gem 'test-unit'

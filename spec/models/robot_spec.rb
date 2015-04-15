@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Robot do
+  before do
+    Robot.delete_all
+  end
 
   describe "simple_draw" do
 
@@ -12,7 +15,7 @@ describe Robot do
       FactoryGirl.create :robot, :results_count => 4
       FactoryGirl.create :robot, :results_count => 4
       FactoryGirl.create :robot, :results_count => 4
-      Robot.simple_draw(4).all.should == [a, b, c, d]
+      Robot.simple_draw(4).all.map(&:id).sort.should == [a.id, b.id, c.id, d.id].sort
     end
 
   end

@@ -36,7 +36,7 @@ describe Providers::Twitter do
       token = mock(:token => "ZOMG", :params => { 'user_id' => 33 })
       token.stub_chain(:client, :site=)
       response = mock(:body => '{"screen_name":"foo","profile_image_url_https":"IMG"}')
-      token.should_receive(:get).with('/1/users/show.json?user_id=33').and_return(response)
+      token.should_receive(:get).with('/1.1/users/show.json?user_id=33').and_return(response)
       lambda {
         @provider.create_user(token)
       }.should change(User, :count).by(1)
