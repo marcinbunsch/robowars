@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  force_ssl if: :ssl_configured?
+
   before_filter :authenticate_user
 
   def authenticate_user
@@ -19,6 +21,10 @@ class ApplicationController < ActionController::Base
 
   def require_staff
     redirect_to "/" unless current_user.staff?
+  end
+
+  def ssl_configured?
+    !(Rails.env.development? || Rails.env.test?)
   end
 
 end
